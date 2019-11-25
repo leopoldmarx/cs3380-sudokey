@@ -4,7 +4,7 @@ from Input.InputNum import InputNum
 
 class Erase(InputNum):
     def __init__(self, inputfield):
-        self.val = ""
+        self.val = "Erase"
         self.row = 3
         self.col = 0
         self.inputfield = inputfield
@@ -14,4 +14,4 @@ class Erase(InputNum):
                                      command=self.click).grid(row=self.row, column=self.col)
 
     def click(self):
-        self.inputfield.window.controller.selected.cellVal.set(self.val)
+        self.inputfield.window.controller.selected.cellVal.set("")

@@ -9,12 +9,16 @@ class Window:
     def __init__(self, master):
 
         self.master = master
-        self.controller = Controller()
-
-        self.inputfieldframe = Frame(master=self.master).grid(row=4,column=3)#.pack(side = "right")
+        self.main = Frame(master= self.master,bg='yellow')
+        self.main.grid(row=1,column=2, sticky="nsew")
 
         self.board = Board(self)
         self.inputfield = InputField(self)
+
+        self.controller = Controller(self)
+
+        master.columnconfigure(1, weight=1)
+        master.rowconfigure(0, weight=1)
 
         master.title("A simple GUI")
 
