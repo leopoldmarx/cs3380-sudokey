@@ -1,4 +1,8 @@
+from abc import ABC, abstractmethod
 
-class InputNum():
-    def __init__(self):
+
+class InputNum(ABC):
+
+    @abstractmethod
+    def click(self):
         pass

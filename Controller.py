@@ -1,3 +1,7 @@
+from Board import Board
+from InputField import InputField
+
+
 class Controller():
     def __init__(self):
-        pass
+        self.selected = None
