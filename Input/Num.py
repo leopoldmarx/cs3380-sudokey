@@ -12,4 +12,5 @@ class Num(InputNum):
                                      command=self.click).grid(row=row, column=col)
 
     def click(self):
+        
         self.inputfield.window.controller.selected.cellVal.set(self.val)
