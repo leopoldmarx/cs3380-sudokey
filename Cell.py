@@ -1,5 +1,7 @@
 import tkinter
 
+from pip._vendor.msgpack.fallback import xrange
+
 
 class Cell():
     def __init__(self, board, x, y):
@@ -9,6 +11,7 @@ class Cell():
                                      textvariable=self.cellVal,
                                      fg="black",
                                      command=self.setSelected,
+                                     bd=0,
                                      height= 2,
                                      width = 2)
         self.button.grid(row = x, column = y)

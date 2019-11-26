@@ -11,7 +11,9 @@ class Erase(InputNum):
         self.button = tkinter.Button(self.inputfield.frame,
                                      text=self.val,
                                      fg="black",
-                                     command=self.click).grid(row=self.row, column=self.col)
+                                     command=self.click,
+                                     borderwidth=30,
+                                     relief=tkinter.FLAT).grid(row=self.row, column=self.col, columnspan=3)
 
     def click(self):
         self.inputfield.window.controller.selected.cellVal.set("")

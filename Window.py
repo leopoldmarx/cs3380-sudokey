@@ -9,8 +9,8 @@ class Window:
     def __init__(self, master):
 
         self.master = master
-        self.main = Frame(master= self.master,bg='yellow')
-        self.main.grid(row=1,column=2, sticky="nsew")
+        self.main = Frame(master= self.master)
+        self.main.pack()
 
         self.board = Board(self)
         self.inputfield = InputField(self)
