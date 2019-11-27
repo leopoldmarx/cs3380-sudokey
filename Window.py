@@ -13,10 +13,10 @@ class Window:
         self.main = Frame(master= self.master)
         self.main.pack()
 
+        self.controller = Controller(self)
+
         self.board = Board(self, 700, 20)
         self.inputfield = InputField(self)
-
-        self.controller = Controller(self)
 
         master.columnconfigure(1, weight=1)
         master.rowconfigure(0, weight=1)

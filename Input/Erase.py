@@ -16,4 +16,4 @@ class Erase(InputNum):
                                      relief=tkinter.FLAT).grid(row=self.row, column=self.col, columnspan=3)
 
     def click(self):
-        self.inputfield.window.controller.selected.cellVal.set("")
+        self.inputfield.window.board.changeCellVal(0)
