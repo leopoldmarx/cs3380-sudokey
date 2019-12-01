@@ -14,6 +14,16 @@ class Undo():
                                      borderwidth=30,
                                      relief=tkinter.FLAT).grid(row=self.row, column=self.col, columnspan=3)
 
+
     def click(self):
-        pass
-        #todo
+        #prints size of stack
+        #self.inputfield.window.board.printStackSize()
+
+        lastIn = self.inputfield.window.board.stack.pop()
+        self.inputfield.window.controller.selected = lastIn.x, lastIn.y
+        self.inputfield.window.board.UndoCellVal(lastIn.PrevValue)
+        #print(lastIn.PrevValue)
+
+
+
+

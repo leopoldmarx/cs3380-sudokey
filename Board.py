@@ -4,6 +4,10 @@ from math import floor
 
 from Game import Game
 
+from Node import Node
+
+
+
 
 class Board():
 
@@ -34,6 +38,8 @@ class Board():
         self.canvas.bind("<Button-1>", self.setSelected)
         self.window.master.bind("<Key>", self.keyboardInput)
 
+        self.stack = []
+
     def drawboard(self):
         self.canvas.delete("all")
         for i in range(10):
@@ -62,12 +68,34 @@ class Board():
         x,y = self.window.controller.selected
         self.selectcell(x,y)
 
+    def getVal(self,x,y):
+        return self.cells[x][y]
+    def printStackSize(self):
+        s = len(self.stack)
+        print(s)
+
+    # created new method to undo cell value
+    def UndoCellVal(self,val):
+        x, y = self.window.controller.selected
+
+        self.cells[x][y] = val
+
+        self.drawboard()
+
+    # each time a new value is inputed, we create a node that stores the previous value and append it to the list
     def changeCellVal(self, val):
         x, y = self.window.controller.selected
 
         if self.original[x][y] == 0:
+            #before changing cell(x,y) value we want to create a reference to last value of that node
+            node = Node(self.getVal(x,y),x,y)
+            #appending node to stack
+            self.stack.append(node)
+            # changes to new value below
             self.cells[x][y] = val
+
             self.drawboard()
+
 
     def writecell(self, x, y, val):
         if self.solution[x][y] != val:
