@@ -19,7 +19,7 @@ I'll list the things on the top of the to do list here
 
   Works in progress()
   - timer
-  - wrong answer counter  
+  - wrong answer counter
 
 
  2. Some things that should be added pretty soon(before final code submission)
@@ -28,4 +28,5 @@ I'll list the things on the top of the to do list here
    c. A text that keeps track of how many errors you make
    d. a message that pops up notifying the user when the game is complete
    e. a restart/new game option
+   f. maybe adjusting button/grid to window size 
   
