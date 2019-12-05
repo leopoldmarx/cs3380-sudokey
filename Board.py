@@ -1,12 +1,10 @@
-from tkinter import Canvas, BOTH, RIGHT
+from tkinter import Canvas, BOTH, TOP
 
 from math import floor
 
 from Game import Game
 
 from Node import Node
-
-
 
 
 class Board():
@@ -20,7 +18,7 @@ class Board():
         self.editcolor = "grey"
         self.wrongcolor = "red"
 
-        self.window  = window
+        self.window = window
         self.margin = margin
         self.dim = dim
         self.side = (dim - margin*2)/9
@@ -30,8 +28,8 @@ class Board():
         self.cells = [[self.original[i][j] for j in range(9)] for i in range(9)]
 
         self.canvas = Canvas(self.window.main,width=self.dim,
-                             height=self.dim)
-        self.canvas.pack(fill=BOTH, side=RIGHT)
+                             height=self.dim-self.margin/2)
+        self.canvas.pack(fill=BOTH, side=TOP)
 
         self.drawboard()
 
@@ -42,11 +40,29 @@ class Board():
 
     def drawboard(self):
         self.canvas.delete("all")
+        x, y = self.window.controller.selected
+        self.canvas.create_rectangle(self.margin, self.margin+self.side*y,
+                                     self.dim - self.margin, self.margin+self.side*(y+1), fill="grey95")
+        self.canvas.create_rectangle(self.margin + self.side * x, self.margin,
+                                     self.margin + self.side * (x + 1), self.dim - self.margin, fill="grey95")
+        self.canvas.create_rectangle(self.margin + self.side * (int)(x / 3)*3,
+                                     self.margin + self.side * (int)(y / 3)*3,
+                                     self.margin + self.side * (1 + (int)(x / 3)) * 3,
+                                     self.margin + self.side * (1 + (int)(y / 3)) * 3, fill="grey95")
+
+        a, b = self.window.controller.selected
+        for i in range(9):
+            for j in range(9):
+                if (self.cells[i][j] == self.cells[a][b] and self.cells[i][j] != 0):
+                    self.canvas.create_rectangle(self.margin + i * self.side, self.margin + self.side * j,
+                                                 self.margin + (i + 1) * self.side, self.margin + self.side * (j + 1),
+                                                 outline="grey95", fill="grey95")
         for i in range(10):
             if i % 3 == 0:
                 color = self.boldrowcolor
             else:
                 color = self.nuteralrowcolor
+
 
             self.canvas.create_line(self.margin + i * self.side,
                                     self.margin,
@@ -65,8 +81,17 @@ class Board():
                 if self.cells[i][j] != 0:
                     self.writecell(i, j, self.cells[i][j])
 
-        x,y = self.window.controller.selected
         self.selectcell(x,y)
+
+    def nineOfVal(self, val):
+        count = 0
+        for i in range(9):
+            for j in range(9):
+                if self.cells[i][j] == val:
+                    count += 1;
+                    if count == 9:
+                        return True
+        return False
 
     def getVal(self,x,y):
         return self.cells[x][y]
@@ -95,6 +120,7 @@ class Board():
             self.cells[x][y] = val
 
             self.drawboard()
+            self.window.inputfield.drawinput()
 
 
     def writecell(self, x, y, val):
