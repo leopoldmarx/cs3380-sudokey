@@ -24,7 +24,7 @@ class Window:
         master.columnconfigure(1, weight=1)
         master.rowconfigure(0, weight=1)
 
-        master.title("A simple GUI")
+        master.title("Sudokey")
 
 if __name__ == "__main__":
     root = Tk()
