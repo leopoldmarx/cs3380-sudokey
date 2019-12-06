@@ -5,8 +5,8 @@ from Input.Erase import Erase
 from Input.Num import Num
 from Undo import Undo
 import math
-
-
+#Leopold Marx, Quoc Than, Gavin Broussard
+#canvas for the input field at the bottom
 class InputField():
     def __init__(self, window, dim, margin):
         self.window = window
@@ -23,6 +23,7 @@ class InputField():
         self.drawinput()
         self.canvas.bind("<Button-1>", self.inputClick)
 
+    #draws the input board
     def drawinput(self):
         self.canvas.delete("all")
 
@@ -70,6 +71,7 @@ class InputField():
                                 3*self.side / 2 + self.margin / 2,
                                 text="HINT", font="Saris 26 bold", tags="text", fill="black")
 
+    #handels what happens when someone clicks the input canvas
     def inputClick(self, event):
         x, y = event.x, event.y
         if self.margin < x < self.dim - self.margin and self.margin/2 < y < self.side + self.margin/2:

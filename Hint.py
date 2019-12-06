@@ -4,7 +4,8 @@ import numpy as np
 
 from Node import Node
 
-
+#Leopold Marx, Quoc Than, Gavin Broussard
+#handles what happens when hint is clicked. randomly fills one empty cell
 class Hint():
     def __init__(self, inputfield):
         self.inputfield = inputfield

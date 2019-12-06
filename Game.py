@@ -3,7 +3,8 @@ import random
 
 import numpy as np
 
-
+#Leopold Marx, Quoc Than, Gavin Broussard
+#gets game from csv file
 class Game:
     __instance = None
 

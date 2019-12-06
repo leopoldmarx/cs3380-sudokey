@@ -2,7 +2,8 @@ import tkinter
 
 from pip._vendor.msgpack.fallback import xrange
 
-
+#Leopold Marx, Quoc Than, Gavin Broussard
+#what happens when a cell is clicked
 class Cell():
     def __init__(self, board, x, y):
         self.board = board

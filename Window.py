@@ -4,7 +4,8 @@ from Board import Board
 from Controller import Controller
 from InputField import InputField
 
-
+#Leopold Marx, Quoc Than, Gavin Broussard
+# This class is simply to handle the window
 class Window:
 
     def __init__(self, master):

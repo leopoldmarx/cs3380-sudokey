@@ -6,7 +6,8 @@ from Game import Game
 
 from Node import Node
 
-
+#Leopold Marx, Quoc Than, Gavin Broussard
+#Board handles anything related to editing, drawing, and storing the board
 class Board():
 
     def __init__(self, window, dim, margin):
@@ -38,8 +39,13 @@ class Board():
 
         self.stack = []
 
+    #drawboard erases the canvas and redraws all the componets of the board
     def drawboard(self):
+        #erase canvas
         self.canvas.delete("all")
+
+        #draws grey rectangles for the selection
+
         x, y = self.window.controller.selected
         self.canvas.create_rectangle(self.margin, self.margin+self.side*y,
                                      self.dim - self.margin, self.margin+self.side*(y+1), fill="grey95")
@@ -50,13 +56,15 @@ class Board():
                                      self.margin + self.side * (1 + (int)(x / 3)) * 3,
                                      self.margin + self.side * (1 + (int)(y / 3)) * 3, fill="grey95")
 
-        a, b = self.window.controller.selected
+        #highlights all cells with the same value as the selected cell
         for i in range(9):
             for j in range(9):
-                if (self.cells[i][j] == self.cells[a][b] and self.cells[i][j] != 0):
+                if (self.cells[i][j] == self.cells[x][y] and self.cells[i][j] != 0):
                     self.canvas.create_rectangle(self.margin + i * self.side, self.margin + self.side * j,
                                                  self.margin + (i + 1) * self.side, self.margin + self.side * (j + 1),
                                                  outline="grey95", fill="grey95")
+
+        #draws lines
         for i in range(10):
             if i % 3 == 0:
                 color = self.boldrowcolor
@@ -76,13 +84,16 @@ class Board():
                                     self.margin + i * self.side,
                                     fill=color)
 
+        #draws the numbers
         for i in range(9):
             for j in range(9):
                 if self.cells[i][j] != 0:
                     self.writecell(i, j, self.cells[i][j])
 
+        #draws selection box
         self.selectcell(x,y)
 
+    #checks if there are nine counts of a value on the board
     def nineOfVal(self, val):
         count = 0
         for i in range(9):
@@ -93,13 +104,11 @@ class Board():
                         return True
         return False
 
+    #gets cell value for given x and y
     def getVal(self,x,y):
         return self.cells[x][y]
-    def printStackSize(self):
-        s = len(self.stack)
-        print(s)
 
-    # created new method to undo cell value
+    #handles what happens when undo is pressed
     def UndoCellVal(self,val):
         x, y = self.window.controller.selected
 
@@ -122,7 +131,7 @@ class Board():
             self.drawboard()
             self.window.inputfield.drawinput()
 
-
+    #draws number into a cell
     def writecell(self, x, y, val):
         if self.solution[x][y] != val:
             color = self.wrongcolor
@@ -135,20 +144,22 @@ class Board():
         j = self.margin + y * self.side + self.side / 2
         self.canvas.create_text(i, j, text=val, font="Saris 26 bold", tags="numbers", fill=color)
 
+    #executed when someone clicks the canvas
     def setSelected(self, event):
-
         x, y = event.x, event.y
         if (self.margin < x < self.dim - self.margin and self.margin < y < self.dim - self.margin):
             x, y = floor((x - self.margin) / self.side), floor((y - self.margin) / self.side)
             self.window.controller.selected = x,y
             self.drawboard()
 
+    #executed when someone types
     def keyboardInput(self, event):
         if event.char in "1234567890":
             self.changeCellVal(int(event.char))
         elif event.char == '\x7f':
             self.changeCellVal(0)
 
+    #draws the red box around the selected cell
     def selectcell(self,x, y):
         self.canvas.create_line(self.margin + x * self.side,
                                 self.margin + y * self.side,

@@ -1,6 +1,7 @@
 import tkinter
 
-
+#Leopold Marx, Quoc Than, Gavin Broussard
+#handles what happens when undo is clicked
 class Undo():
     def __init__(self, inputfield):
         self.inputfield = inputfield
